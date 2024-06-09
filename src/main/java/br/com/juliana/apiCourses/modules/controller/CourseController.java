@@ -15,6 +15,9 @@ import java.util.List;
 import java.util.UUID;
 
 import static org.springframework.http.ResponseEntity.*;
+import org.springframework.web.bind.annotation.GetMapping;
+
+
 
 @RestController
 @RequestMapping("/course")
@@ -55,9 +58,9 @@ public class CourseController {
         }
     }
 
-    @GetMapping("/find/{name}")
-    public ResponseEntity<CourseEntity> searchByName(@PathVariable String name) {
-        CourseEntity course = courseRepository.findCourseByName(name);
+    @GetMapping("/search/{name}")
+    public ResponseEntity<List<CourseEntity>> searchByName(@PathVariable String name) {
+        List<CourseEntity> course = courseRepository.findByName(name);
         if(course != null) {
             return ResponseEntity.ok(course);
         } else {
@@ -65,8 +68,16 @@ public class CourseController {
         }
     }
 
-
-
+    @GetMapping("/find/{category}")
+    public ResponseEntity<List<CourseEntity>> searchByCategory(@PathVariable String category){
+        List<CourseEntity> course = courseRepository.findByCategory(category);
+        if(course != null) {
+            return ResponseEntity.ok(course);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
+    }
+    
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable UUID id) {
         courseService.delete(id);

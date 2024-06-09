@@ -2,6 +2,7 @@ package br.com.juliana.apiCourses.modules.service;
 
 import br.com.juliana.apiCourses.exceptions.CourseFoundException;
 import br.com.juliana.apiCourses.modules.entity.CourseEntity;
+import br.com.juliana.apiCourses.modules.entity.EnumCourseStatus;
 import br.com.juliana.apiCourses.modules.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,11 +29,16 @@ public class CourseService {
     }
 
     public String searchByName(String name) {
-        return courseRepository.findCourseByName(name).getName();
+        return ((CourseEntity) courseRepository.findByName(name)).getName();
     }
 
-  
+    public String searchByCategory(String category) {
+        return ((CourseEntity) courseRepository.findByCategory(category)).getCategory();
+    }
 
+    public EnumCourseStatus searchStatus(EnumCourseStatus status) {
+        return courseRepository.findByStatus(status).getStatus();
+    }
 
     public void delete(UUID id) {
         CourseEntity courseEntity = courseRepository.findById(id).orElseThrow(() -> new CourseFoundException());
