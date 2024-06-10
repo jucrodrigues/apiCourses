@@ -1,13 +1,16 @@
 package br.com.juliana.apiCourses.modules.dto;
 
-import br.com.juliana.apiCourses.modules.entity.EnumCourseStatus;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CourseDTO {
 
     private String name;
     private String category;
-    private EnumCourseStatus status;
+    private Boolean active;
 
 }

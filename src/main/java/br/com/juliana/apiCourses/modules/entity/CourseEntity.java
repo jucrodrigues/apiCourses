@@ -2,6 +2,7 @@ package br.com.juliana.apiCourses.modules.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,8 +30,8 @@ public class CourseEntity {
     @NotBlank(message = "Esse campo e obrigatorio")
     private String category;
 
-   @Enumerated(EnumType.STRING)
-    private EnumCourseStatus status;
+    @NotNull
+    private boolean active;
 
     @CreationTimestamp
     private LocalDateTime created_at;
